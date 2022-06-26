@@ -1,11 +1,8 @@
 # UniversalRP 自定义渲染管线扩展
 
-# [![Build](https://github.com/penrose/penrose/actions/workflows/build.yml/badge.svg)](https://github.com/zhanglongfei/UniversalRP/actions/workflows/blank.yml) [![codecov](https://codecov.io/gh/zhanglongfei/UniversalRP/branch/Master/graph/badge.svg?token=8dhAVwcCYW)](https://codecov.io/gh/zhanglongfei/UniversalRP) [![license](https://img.shields.io/github/license/zhanglongfei/universalrp)](LICENSE)
+[![Build](https://github.com/penrose/penrose/actions/workflows/build.yml/badge.svg)](https://github.com/zhanglongfei/UniversalRP/actions/workflows/blank.yml)  [![license](https://img.shields.io/github/license/devagame/universalrp)](LICENSE) [![Author](https://img.shields.io/badge/Unity-2021.3.1f1c1-blue.svg "")](https://github.com/devagame/ "") [![Author](https://img.shields.io/badge/UniversalRP-12.1.6+-blue.svg "")](https://github.com/devagame/ "") [![Author](https://img.shields.io/badge/UGUI-v1.0-blue.svg "")](https://github.com/devagame/ "")
 
-# [![Author](https://img.shields.io/badge/Unity-2021.3.1f1c1-blue.svg "")](https://github.com/zhanglongfei/ "") [![Author](https://img.shields.io/badge/UniversalRP-12.1.6+-blue.svg "")](https://github.com/zhanglongfei/ "") [![Author](https://img.shields.io/badge/UGUI-v1.0-blue.svg "")](https://github.com/zhanglongfei/ "")
-
-本项目是 UniversalRP 的扩展库 支持自定义设置 URP 相机走 Gamma 还是 Linear 修复线性色彩空间中的 UI 切图的透明度错误,
-能够让 UI 设计师在 Unity 中保持原有的 sRBG 工作流.
+本项目是 UniversalRP 的扩展库 支持自定义设置 URP 相机走 Gamma 还是 Linear 修复线性空间中的 UI 透明度差异问题, 能够让 UI 设计师在 Unity 中保持原有的 sRBG 工作流.
 
 * [UICamera => Gamma]    <=>   [SceneCamera => Linear]
 
