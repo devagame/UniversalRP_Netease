@@ -13,13 +13,13 @@ namespace UnityEngine.Rendering.Universal.Internal
     public class DrawObjectsPassEx : ScriptableRenderPass
     {
         public FilteringSettings m_FilteringSettings;
-        RenderStateBlock m_RenderStateBlock;
-        List<ShaderTagId> m_ShaderTagIdList = new List<ShaderTagId>();
-        ProfilingSampler m_ProfilingSampler;
-        bool m_IsOpaque;
+        private RenderStateBlock m_RenderStateBlock;
+        private List<ShaderTagId> m_ShaderTagIdList = new List<ShaderTagId>();
+        private ProfilingSampler m_ProfilingSampler;
+        private bool m_IsOpaque;
 
-        RenderTargetIdentifier m_NewTarget;
-        bool isReassignTarget;
+        private RenderTargetIdentifier m_NewTarget;
+        private bool isReassignTarget;
 
         public RenderTargetIdentifier RenderTarget
         {
@@ -31,7 +31,7 @@ namespace UnityEngine.Rendering.Universal.Internal
             }
         }
 
-        static readonly int s_DrawObjectPassDataPropID = Shader.PropertyToID("_DrawObjectPassData");
+        private static readonly int s_DrawObjectPassDataPropID = Shader.PropertyToID("_DrawObjectPassData");
 
         public DrawObjectsPassEx(string profilerTag, ShaderTagId[] shaderTagIds, bool opaque, RenderPassEvent evt,
             RenderQueueRange renderQueueRange, LayerMask layerMask, StencilState stencilState, int stencilReference)

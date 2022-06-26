@@ -12,7 +12,6 @@
             return renderType == CameraRenderType.Base
                    || colorSpaceUsage != ColorSpace.Gamma
                    || QualitySettings.activeColorSpace == ColorSpace.Gamma;
-            ;
         }
 
         public bool NeedLinearToSRGB()

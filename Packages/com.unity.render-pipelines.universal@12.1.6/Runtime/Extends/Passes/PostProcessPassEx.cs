@@ -2,12 +2,12 @@
 {
     public partial class PostProcessPass
     {
-        ComputeBuffer easuCB;
-        ComputeBuffer rcasCB;
+        private ComputeBuffer easuCB;
+        private ComputeBuffer rcasCB;
 
-        ProfilingSampler fsrSampler = new ProfilingSampler(FsrShaderConstants.FSR_PROFILE_ID);
+        private ProfilingSampler fsrSampler = new ProfilingSampler(FsrShaderConstants.FSR_PROFILE_ID);
 
-        void CleanupFSRBuffers()
+        private void CleanupFSRBuffers()
         {
             if (easuCB != null)
             {
@@ -22,7 +22,7 @@
             }
         }
 
-        void SetupFSRBuffers(bool enableFSR)
+        private void SetupFSRBuffers(bool enableFSR)
         {
             if (enableFSR)
             {
@@ -46,7 +46,7 @@
             m_hasExternalPostPasses = hasExternalPostPasses;
         }
 
-        RenderTextureDescriptor GetUAVCompatibleDescriptor(int width, int height)
+        private RenderTextureDescriptor GetUAVCompatibleDescriptor(int width, int height)
         {
             var desc = m_Descriptor;
             desc.depthBufferBits = 0;
@@ -57,7 +57,7 @@
             return desc;
         }
 
-        bool TryRenderFSR(CommandBuffer cmd, ref CameraData cameraData, Material material,
+        private bool TryRenderFSR(CommandBuffer cmd, ref CameraData cameraData, Material material,
             RenderBufferLoadAction colorLoadAction, RenderTargetHandle cameraTargetHandle)
         {
             if (!cameraData.exData.enableFSR)
@@ -79,7 +79,7 @@
 
         #region EASU
 
-        void EdgeAdaptiveSpatialUpsampling(CommandBuffer cmd, CameraData cameraData, bool needs_convert_to_srgb)
+        private void EdgeAdaptiveSpatialUpsampling(CommandBuffer cmd, CameraData cameraData, bool needs_convert_to_srgb)
         {
             var easuCS = m_Data.shaders.easuCS;
             if (needs_convert_to_srgb)
@@ -121,7 +121,8 @@
 
         #region RCAS
 
-        void RobustContrastAdaptiveSharpening(CommandBuffer cmd, CameraData cameraData, bool needs_convert_to_srgb)
+        private void RobustContrastAdaptiveSharpening(CommandBuffer cmd, CameraData cameraData,
+            bool needs_convert_to_srgb)
         {
             var rcasCS = m_Data.shaders.rcasCS;
             if (needs_convert_to_srgb)
@@ -160,7 +161,7 @@
 
         #region FSR
 
-        void DoFSR(CommandBuffer cmd, ref CameraData cameraData, RenderTargetIdentifier dst)
+        private void DoFSR(CommandBuffer cmd, ref CameraData cameraData, RenderTargetIdentifier dst)
         {
             bool needs_convert_to_srgb =
                 !(cameraData.isHdrEnabled || QualitySettings.activeColorSpace == ColorSpace.Gamma);

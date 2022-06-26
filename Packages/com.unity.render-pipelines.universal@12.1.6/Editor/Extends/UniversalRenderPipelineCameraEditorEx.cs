@@ -2,26 +2,26 @@
 
 namespace UnityEditor.Rendering.Universal
 {
-    partial class UniversalRenderPipelineCameraEditor
+    internal partial class UniversalRenderPipelineCameraEditor
     {
-        partial class StylesEx
+        private partial class StylesEx
         {
             public static GUIContent AMDFSR = EditorGUIUtility.TrTextContent("AMD FSR 1.0",
                 "AMD FidelityFX Super Resolution 1.0 is a cutting edge super-optimized spatial upscaling technology that produces impressive image quality at fast framerates.");
         }
 
-        SerializedProperty m_AdditionalCameraDataRenderAMDFSR;
-        SerializedProperty colorSpaceUsage;
-        SerializedProperty renderPostProcessing;
+        private SerializedProperty m_AdditionalCameraDataRenderAMDFSR;
+        private SerializedProperty colorSpaceUsage;
+        private SerializedProperty renderPostProcessing;
 
 
-        void DrawRenderSettingsEx()
+        private void DrawRenderSettingsEx()
         {
             EditorGUILayout.PropertyField(colorSpaceUsage);
         }
 
 
-        void InitEx(SerializedObject m_AdditionalCameraDataSO)
+        private void InitEx(SerializedObject m_AdditionalCameraDataSO)
         {
             m_AdditionalCameraDataRenderAMDFSR = m_AdditionalCameraDataSO.FindProperty("m_AMDFSR");
             colorSpaceUsage = m_AdditionalCameraDataSO.FindProperty("colorSpaceUsage");

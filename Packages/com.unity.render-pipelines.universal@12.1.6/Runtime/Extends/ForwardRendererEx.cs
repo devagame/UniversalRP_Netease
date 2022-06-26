@@ -4,9 +4,9 @@ namespace UnityEngine.Rendering.Universal
 {
     partial class UniversalRenderer
     {
-        DrawObjectsPassEx drawUIObjectPass;
+        private DrawObjectsPassEx drawUIObjectPass;
 
-        BlitPassEx gammaPrePass, gammaPostPass;
+        private BlitPassEx gammaPrePass, gammaPostPass;
 
         /// <summary>
         /// 
@@ -23,13 +23,11 @@ namespace UnityEngine.Rendering.Universal
             SetupCameraGammaRendering(context, ref renderingData);
         }
 
-
         public void DisposeEx()
         {
             gammaPostPass.Cleanup();
         }
-
-
+        
         public void InitCameraGammaRendering(UniversalRendererData data)
         {
             gammaPrePass = new BlitPassEx(nameof(gammaPrePass), RenderPassEvent.AfterRendering + 10, m_BlitMaterial);

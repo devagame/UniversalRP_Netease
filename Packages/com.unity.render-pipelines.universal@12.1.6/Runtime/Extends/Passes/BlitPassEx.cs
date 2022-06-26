@@ -24,8 +24,7 @@
         public void Cleanup()
         {
         }
-
-
+        
         public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
         {
             if (m_BlitMaterial == null)

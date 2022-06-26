@@ -22,13 +22,13 @@
             new AMDFSRSettings(.50f, -1.0f)
         };
 
-        static void InitialCameraDataEx(UniversalAdditionalCameraData additionalCameraData, ref CameraData cameraData,
+        private static void InitialCameraDataEx(UniversalAdditionalCameraData additionalCameraData, ref CameraData cameraData,
             bool resolveFinalTarget)
         {
             InitialCameraDataFsr(additionalCameraData, ref cameraData, resolveFinalTarget);
         }
 
-        static void InitialCameraDataFsr(UniversalAdditionalCameraData additionalCameraData, ref CameraData cameraData,
+        private static void InitialCameraDataFsr(UniversalAdditionalCameraData additionalCameraData, ref CameraData cameraData,
             bool resolveFinalTarget)
         {
             if (additionalCameraData != null)

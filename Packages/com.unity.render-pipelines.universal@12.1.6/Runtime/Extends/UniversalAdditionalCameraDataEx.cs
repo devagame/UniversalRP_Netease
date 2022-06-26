@@ -11,21 +11,22 @@
             Performance
         }
 
-        [SerializeField] AMDFSR m_AMDFSR = AMDFSR.Disabled;
+        [SerializeField] 
+        private AMDFSR m_AMDFSR = AMDFSR.Disabled;
 
         public AMDFSR amdFSR
         {
             get => m_AMDFSR;
             set => m_AMDFSR = value;
         }
-
-
-        [SerializeField] ColorSpace colorSpaceUsage = ColorSpace.Linear;
+        
+        [SerializeField] 
+        private ColorSpace m_ColorSpaceUsage = ColorSpace.Linear;
 
         public ColorSpace ColorSpaceUsage
         {
-            get => colorSpaceUsage;
-            set => colorSpaceUsage = value;
+            get => m_ColorSpaceUsage;
+            set => m_ColorSpaceUsage = value;
         }
     }
 }
