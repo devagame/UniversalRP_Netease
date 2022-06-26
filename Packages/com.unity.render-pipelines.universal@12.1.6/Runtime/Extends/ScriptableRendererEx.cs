@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UnityEngine.Rendering.Universal
+﻿namespace UnityEngine.Rendering.Universal
 {
     partial class ScriptableRenderer
     {
@@ -12,7 +6,6 @@ namespace UnityEngine.Rendering.Universal
         {
             if (m_ActiveRenderPassQueue.Contains(pass))
                 m_ActiveRenderPassQueue.Remove(pass);
-            
         }
     }
 }

@@ -1,22 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-using UnityEngine.Rendering.Universal;
+﻿using UnityEngine;
 
 namespace UnityEditor.Rendering.Universal
 {
-
-
-
     partial class UniversalRenderPipelineCameraEditor
     {
-
         partial class StylesEx
         {
-            public static GUIContent AMDFSR = EditorGUIUtility.TrTextContent("AMD FSR 1.0", "AMD FidelityFX Super Resolution 1.0 is a cutting edge super-optimized spatial upscaling technology that produces impressive image quality at fast framerates.");
+            public static GUIContent AMDFSR = EditorGUIUtility.TrTextContent("AMD FSR 1.0",
+                "AMD FidelityFX Super Resolution 1.0 is a cutting edge super-optimized spatial upscaling technology that produces impressive image quality at fast framerates.");
         }
 
         SerializedProperty m_AdditionalCameraDataRenderAMDFSR;
@@ -39,11 +30,11 @@ namespace UnityEditor.Rendering.Universal
 
         private void DrawPostProcessingEx()
         {
-            if (renderPostProcessing.boolValue)
-                EditorGUILayout.PropertyField(m_AdditionalCameraDataRenderAMDFSR, StylesEx.AMDFSR);
+            //if (renderPostProcessing.boolValue)
+            //    EditorGUILayout.PropertyField(m_AdditionalCameraDataRenderAMDFSR, StylesEx.AMDFSR);
         }
 
-        public static void DrawRenderSettingsEx(UniversalRenderPipelineSerializedCamera cam,Editor owner)
+        public static void DrawRenderSettingsEx(UniversalRenderPipelineSerializedCamera cam, Editor owner)
         {
             var e = owner as UniversalRenderPipelineCameraEditor;
             if (e == null)
@@ -60,10 +51,5 @@ namespace UnityEditor.Rendering.Universal
 
             e.DrawPostProcessingEx();
         }
-
-
     }
-
-
-
 }

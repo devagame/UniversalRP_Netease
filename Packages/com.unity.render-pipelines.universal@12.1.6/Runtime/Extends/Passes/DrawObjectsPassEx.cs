@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using UnityEngine.Profiling;
 
 namespace UnityEngine.Rendering.Universal.Internal
 {
@@ -32,9 +30,11 @@ namespace UnityEngine.Rendering.Universal.Internal
                 isReassignTarget = true;
             }
         }
+
         static readonly int s_DrawObjectPassDataPropID = Shader.PropertyToID("_DrawObjectPassData");
 
-        public DrawObjectsPassEx(string profilerTag, ShaderTagId[] shaderTagIds, bool opaque, RenderPassEvent evt, RenderQueueRange renderQueueRange, LayerMask layerMask, StencilState stencilState, int stencilReference)
+        public DrawObjectsPassEx(string profilerTag, ShaderTagId[] shaderTagIds, bool opaque, RenderPassEvent evt,
+            RenderQueueRange renderQueueRange, LayerMask layerMask, StencilState stencilState, int stencilReference)
         {
             m_ProfilingSampler = new ProfilingSampler(profilerTag);
             foreach (ShaderTagId sid in shaderTagIds)
@@ -57,13 +57,20 @@ namespace UnityEngine.Rendering.Universal.Internal
             m_FilteringSettings.layerMask = cullingMask;
         }
 
-        public DrawObjectsPassEx(string profilerTag, bool opaque, RenderPassEvent evt, RenderQueueRange renderQueueRange, LayerMask layerMask, StencilState stencilState, int stencilReference)
+        public DrawObjectsPassEx(string profilerTag, bool opaque, RenderPassEvent evt,
+            RenderQueueRange renderQueueRange, LayerMask layerMask, StencilState stencilState, int stencilReference)
             : this(profilerTag,
-                new ShaderTagId[] { new ShaderTagId("SRPDefaultUnlit"), new ShaderTagId("UniversalForward"), new ShaderTagId("UniversalForwardOnly"), new ShaderTagId("LightweightForward") },
+                new ShaderTagId[]
+                {
+                    new ShaderTagId("SRPDefaultUnlit"), new ShaderTagId("UniversalForward"),
+                    new ShaderTagId("UniversalForwardOnly"), new ShaderTagId("LightweightForward")
+                },
                 opaque, evt, renderQueueRange, layerMask, stencilState, stencilReference)
-        { }
+        {
+        }
 
-        internal DrawObjectsPassEx(URPProfileId profileId, bool opaque, RenderPassEvent evt, RenderQueueRange renderQueueRange, LayerMask layerMask, StencilState stencilState, int stencilReference)
+        internal DrawObjectsPassEx(URPProfileId profileId, bool opaque, RenderPassEvent evt,
+            RenderQueueRange renderQueueRange, LayerMask layerMask, StencilState stencilState, int stencilReference)
             : this(profileId.GetType().Name, opaque, evt, renderQueueRange, layerMask, stencilState, stencilReference)
         {
             m_ProfilingSampler = ProfilingSampler.Get(profileId);
@@ -98,7 +105,7 @@ namespace UnityEngine.Rendering.Universal.Internal
                     CoreUtils.SetRenderTarget(cmd, m_NewTarget);
                 }
 
-                if(renderingData.cameraData.exData.colorSpaceUsage == ColorSpace.Gamma)
+                if (renderingData.cameraData.exData.colorSpaceUsage == ColorSpace.Gamma)
                 {
                     cmd.EnableShaderKeyword(ShaderKeywordStrings.LinearToSRGBConversion);
                 }
@@ -107,7 +114,9 @@ namespace UnityEngine.Rendering.Universal.Internal
                 cmd.Clear();
 
                 Camera camera = renderingData.cameraData.camera;
-                var sortFlags = (m_IsOpaque) ? renderingData.cameraData.defaultOpaqueSortFlags : SortingCriteria.CommonTransparent;
+                var sortFlags = (m_IsOpaque)
+                    ? renderingData.cameraData.defaultOpaqueSortFlags
+                    : SortingCriteria.CommonTransparent;
                 var drawSettings = CreateDrawingSettings(m_ShaderTagIdList, ref renderingData, sortFlags);
                 var filterSettings = m_FilteringSettings;
 
@@ -119,11 +128,14 @@ namespace UnityEngine.Rendering.Universal.Internal
                 }
 #endif
 
-                context.DrawRenderers(renderingData.cullResults, ref drawSettings, ref filterSettings, ref m_RenderStateBlock);
+                context.DrawRenderers(renderingData.cullResults, ref drawSettings, ref filterSettings,
+                    ref m_RenderStateBlock);
 
                 // Render objects that did not match any shader pass with error shader
-                RenderingUtils.RenderObjectsWithError(context, ref renderingData.cullResults, camera, filterSettings, SortingCriteria.None);
+                RenderingUtils.RenderObjectsWithError(context, ref renderingData.cullResults, camera, filterSettings,
+                    SortingCriteria.None);
             }
+
             context.ExecuteCommandBuffer(cmd);
             CommandBufferPool.Release(cmd);
         }

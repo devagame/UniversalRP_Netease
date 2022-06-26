@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UnityEngine.Rendering.Universal
+﻿namespace UnityEngine.Rendering.Universal
 {
     public struct CameraDataEx
     {
@@ -16,15 +10,15 @@ namespace UnityEngine.Rendering.Universal
         public bool FsrNeedFinalBlit()
         {
             return renderType == CameraRenderType.Base
-                || colorSpaceUsage != ColorSpace.Gamma
-                || QualitySettings.activeColorSpace == ColorSpace.Gamma;
+                   || colorSpaceUsage != ColorSpace.Gamma
+                   || QualitySettings.activeColorSpace == ColorSpace.Gamma;
             ;
         }
 
         public bool NeedLinearToSRGB()
         {
             return colorSpaceUsage == ColorSpace.Gamma
-                && QualitySettings.activeColorSpace == ColorSpace.Linear;
+                   && QualitySettings.activeColorSpace == ColorSpace.Linear;
         }
     }
 }

@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UnityEngine.Rendering.Universal.Internal
+﻿namespace UnityEngine.Rendering.Universal.Internal
 {
     public class BlitPassEx : FinalBlitPass
     {
-
-        public bool isPrePass,isPostPass;
+        public bool isPrePass, isPostPass;
 
         public BlitPassEx(string samplerName, RenderPassEvent evt, Material blitMaterial) : base(evt, blitMaterial)
         {
@@ -30,7 +23,6 @@ namespace UnityEngine.Rendering.Universal.Internal
 
         public void Cleanup()
         {
-
         }
 
 
@@ -38,7 +30,9 @@ namespace UnityEngine.Rendering.Universal.Internal
         {
             if (m_BlitMaterial == null)
             {
-                Debug.LogErrorFormat("Missing {0}. {1} render pass will not execute. Check for missing reference in the renderer resources.", m_BlitMaterial, GetType().Name);
+                Debug.LogErrorFormat(
+                    "Missing {0}. {1} render pass will not execute. Check for missing reference in the renderer resources.",
+                    m_BlitMaterial, GetType().Name);
                 return;
             }
 
@@ -50,7 +44,9 @@ namespace UnityEngine.Rendering.Universal.Internal
             var camera = cameraData.camera;
             var needLinearToSRGB = cameraData.exData.NeedLinearToSRGB();
 
-            RenderTargetIdentifier cameraTarget = (cameraData.targetTexture != null) ? new RenderTargetIdentifier(cameraData.targetTexture) : BuiltinRenderTextureType.CameraTarget;
+            RenderTargetIdentifier cameraTarget = (cameraData.targetTexture != null)
+                ? new RenderTargetIdentifier(cameraData.targetTexture)
+                : BuiltinRenderTextureType.CameraTarget;
             RenderTargetIdentifier sourceTarget = m_Source;
 
             bool isSceneViewCamera = cameraData.isSceneViewCamera;
@@ -79,7 +75,9 @@ namespace UnityEngine.Rendering.Universal.Internal
 
                 if (isPostPass)
                 {
-                    sourceTarget = cameraData.exData.enableFSR ? PostProcessPass.FsrShaderConstants._EASUOutputTexture : ShaderPropertyId._FULLSIZE_GAMMA_TEX;
+                    sourceTarget = cameraData.exData.enableFSR
+                        ? PostProcessPass.FsrShaderConstants._EASUOutputTexture
+                        : ShaderPropertyId._FULLSIZE_GAMMA_TEX;
                     //cameraTarget = (cameraData.targetTexture != null) ? new RenderTargetIdentifier(cameraData.targetTexture) : RenderTargetHandle.GetCameraTarget(cameraData.xr).Identifier();
 
                     if (needLinearToSRGB)
@@ -100,7 +98,6 @@ namespace UnityEngine.Rendering.Universal.Internal
                     cmd.DisableShaderKeyword(ShaderKeywordStrings.SRGBToLinearConversion);
                     cmd.ReleaseTemporaryRT(ShaderPropertyId._FULLSIZE_GAMMA_TEX);
                 }
-
             }
 
             context.ExecuteCommandBuffer(cmd);
