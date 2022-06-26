@@ -246,6 +246,8 @@ namespace UnityEngine.Rendering.Universal
         /// Camera position in world space.
         /// </summary>
         public Vector3 worldSpaceCameraPos;
+
+        public CameraDataEx exData;   // Add By: XGAME
     }
 
     public struct ShadowData
@@ -308,7 +310,7 @@ namespace UnityEngine.Rendering.Universal
         public uint layerMask;
     }
 
-    internal static class ShaderPropertyId
+    internal static partial class ShaderPropertyId  // Add By: XGAME
     {
         public static readonly int glossyEnvironmentColor = Shader.PropertyToID("_GlossyEnvironmentColor");
         public static readonly int subtractiveShadowColor = Shader.PropertyToID("_SubtractiveShadowColor");
@@ -373,7 +375,7 @@ namespace UnityEngine.Rendering.Universal
         public bool useFastSRGBLinearConversion;
     }
 
-    public static class ShaderKeywordStrings
+    public static partial class ShaderKeywordStrings   // Add By: XGAME
     {
         public static readonly string MainLightShadows = "_MAIN_LIGHT_SHADOWS";
         public static readonly string MainLightShadowCascades = "_MAIN_LIGHT_SHADOWS_CASCADE";

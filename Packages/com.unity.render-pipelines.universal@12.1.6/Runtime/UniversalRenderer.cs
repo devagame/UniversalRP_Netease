@@ -32,7 +32,7 @@ namespace UnityEngine.Rendering.Universal
     /// This renderer is supported on all Universal RP supported platforms.
     /// It uses a classic forward rendering strategy with per-object light culling.
     /// </summary>
-    public sealed class UniversalRenderer : ScriptableRenderer
+    public sealed partial class UniversalRenderer : ScriptableRenderer  // Add By: XGAME
     {
         const int k_DepthStencilBufferBits = 32;
         static readonly List<ShaderTagId> k_DepthNormalsOnly = new List<ShaderTagId> { new ShaderTagId("DepthNormalsOnly") };
@@ -307,6 +307,8 @@ namespace UnityEngine.Rendering.Universal
             LensFlareCommonSRP.mergeNeeded = 0;
             LensFlareCommonSRP.maxLensFlareWithOcclusionTemporalSample = 1;
             LensFlareCommonSRP.Initialize();
+
+            InitEx(data);  // Add By: XGAME
         }
 
         /// <inheritdoc />
@@ -327,6 +329,8 @@ namespace UnityEngine.Rendering.Universal
             Blitter.Cleanup();
 
             LensFlareCommonSRP.Dispose();
+
+            DisposeEx();  // Add By: XGAME
         }
 
         private void SetupFinalPassDebug(ref CameraData cameraData)
@@ -783,16 +787,18 @@ namespace UnityEngine.Rendering.Universal
             }
             EnqueuePass(m_OnRenderObjectCallbackPass);
 
+
             bool hasCaptureActions = renderingData.cameraData.captureActions != null && lastCameraInTheStack;
+            bool applyFinalPostProcessing = IsApplyFinalPostProcessing(ref renderingData, anyPostProcessing, lastCameraInTheStack);   // Add By: XGAME
 
             // When FXAA or scaling is active, we must perform an additional pass at the end of the frame for the following reasons:
             // 1. FXAA expects to be the last shader running on the image before it's presented to the screen. Since users are allowed
             //    to add additional render passes after post processing occurs, we can't run FXAA until all of those passes complete as well.
             //    The FinalPost pass is guaranteed to execute after user authored passes so FXAA is always run inside of it.
             // 2. UberPost can only handle upscaling with linear filtering. All other filtering methods require the FinalPost pass.
-            bool applyFinalPostProcessing = anyPostProcessing && lastCameraInTheStack &&
+            /*bool applyFinalPostProcessing = anyPostProcessing && lastCameraInTheStack &&
                 ((renderingData.cameraData.antialiasing == AntialiasingMode.FastApproximateAntialiasing) ||
-                 ((renderingData.cameraData.imageScalingMode == ImageScalingMode.Upscaling) && (renderingData.cameraData.upscalingFilter != ImageUpscalingFilter.Linear)));
+                 ((renderingData.cameraData.imageScalingMode == ImageScalingMode.Upscaling) && (renderingData.cameraData.upscalingFilter != ImageUpscalingFilter.Linear)));*/  // Add By: XGAME
 
             // When post-processing is enabled we can use the stack to resolve rendering to camera target (screen or RT).
             // However when there are render passes executing after post we avoid resolving to screen so rendering continues (before sRGBConvertion etc)
@@ -816,7 +822,7 @@ namespace UnityEngine.Rendering.Universal
                 // Do FXAA or any other final post-processing effect that might need to run after AA.
                 if (applyFinalPostProcessing)
                 {
-                    finalPostProcessPass.SetupFinalPass(sourceForFinalPass, true, hasPassesAfterPostProcessing);
+                    finalPostProcessPass.SetupFinalPass(sourceForFinalPass, true, cameraTargetDescriptor);  // hasPassesAfterPostProcessing Add By: XGAME
                     EnqueuePass(finalPostProcessPass);
                 }
 
@@ -874,6 +880,7 @@ namespace UnityEngine.Rendering.Universal
                 EnqueuePass(m_FinalDepthCopyPass);
             }
 #endif
+            SetupEx(context, ref renderingData);  // Add By: XGAME
         }
 
         /// <inheritdoc />

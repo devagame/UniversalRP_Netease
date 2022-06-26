@@ -258,7 +258,7 @@ namespace UnityEngine.Rendering.Universal
 
             if (requireFinalPostProcessPass && m_PostProcessPasses.isCreated)
             {
-                finalPostProcessPass.SetupFinalPass(colorTargetHandle, hasPassesAfterPostProcessing);
+                finalPostProcessPass.SetupFinalPass(colorTargetHandle, hasPassesAfterPostProcessing, false);
                 EnqueuePass(finalPostProcessPass);
             }
             else if (lastCameraInStack && colorTargetHandle != RenderTargetHandle.CameraTarget)

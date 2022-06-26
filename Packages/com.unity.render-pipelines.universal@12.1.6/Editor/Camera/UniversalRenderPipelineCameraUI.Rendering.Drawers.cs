@@ -118,6 +118,9 @@ namespace UnityEditor.Rendering.Universal
                 CED.Group(
                     CameraUI.Rendering.Drawer_Rendering_CullingMask,
                     CameraUI.Rendering.Drawer_Rendering_OcclusionCulling
+                ),
+                CED.Group(
+                    UniversalRenderPipelineCameraEditor.DrawRenderSettingsEx    // Add By: XGAME
                 )
             );
 
@@ -215,6 +218,7 @@ namespace UnityEditor.Rendering.Universal
             static void DrawerRenderingRenderPostProcessing(UniversalRenderPipelineSerializedCamera p, Editor owner)
             {
                 EditorGUILayout.PropertyField(p.renderPostProcessing, Styles.renderPostProcessing);
+                UniversalRenderPipelineCameraEditor.DrawPostProcessingEx(owner);  // Add By: XGAME
             }
 
             static void DrawerRenderingPriority(UniversalRenderPipelineSerializedCamera p, Editor owner)

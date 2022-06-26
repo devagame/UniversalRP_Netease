@@ -236,7 +236,7 @@ namespace UnityEngine.Rendering.Universal
     [RequireComponent(typeof(Camera))]
     [ImageEffectAllowedInSceneView]
     [URPHelpURL("universal-additional-camera-data")]
-    public class UniversalAdditionalCameraData : MonoBehaviour, ISerializationCallbackReceiver, IAdditionalData
+    public partial class UniversalAdditionalCameraData : MonoBehaviour, ISerializationCallbackReceiver, IAdditionalData  // Add By: XGAME
     {
         const string k_GizmoPath = "Packages/com.unity.render-pipelines.universal/Editor/Gizmos/";
         const string k_BaseCameraGizmoPath = k_GizmoPath + "Camera_Base.png";

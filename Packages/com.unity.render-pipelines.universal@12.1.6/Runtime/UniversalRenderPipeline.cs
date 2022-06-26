@@ -963,6 +963,8 @@ namespace UnityEngine.Rendering.Universal
             cameraData.SetViewAndProjectionMatrix(camera.worldToCameraMatrix, projectionMatrix);
 
             cameraData.worldSpaceCameraPos = camera.transform.position;
+
+            InitialCameraDataEx(additionalCameraData, ref cameraData, resolveFinalTarget);   // Add By: XGAME
         }
 
         static void InitializeRenderingData(UniversalRenderPipelineAsset settings, ref CameraData cameraData, ref CullingResults cullResults,

@@ -9,8 +9,8 @@ namespace UnityEngine.Rendering.Universal.Internal
     /// </summary>
     public class FinalBlitPass : ScriptableRenderPass
     {
-        RenderTargetIdentifier m_Source;
-        Material m_BlitMaterial;
+        protected RenderTargetIdentifier m_Source;  // Add By: XGAME
+        protected Material m_BlitMaterial;  // Add By: XGAME
 
         public FinalBlitPass(RenderPassEvent evt, Material blitMaterial)
         {

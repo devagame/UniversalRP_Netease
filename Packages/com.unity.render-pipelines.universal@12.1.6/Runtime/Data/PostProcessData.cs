@@ -7,7 +7,7 @@ using System;
 namespace UnityEngine.Rendering.Universal
 {
     [Serializable]
-    public class PostProcessData : ScriptableObject
+    public partial class PostProcessData : ScriptableObject  // Add By: XGAME
     {
 #if UNITY_EDITOR
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1812")]
@@ -37,7 +37,7 @@ namespace UnityEngine.Rendering.Universal
 #endif
 
         [Serializable, ReloadGroup]
-        public sealed class ShaderResources
+        public sealed partial class ShaderResources  // Add By: XGAME
         {
             [Reload("Shaders/PostProcessing/StopNaN.shader")]
             public Shader stopNanPS;

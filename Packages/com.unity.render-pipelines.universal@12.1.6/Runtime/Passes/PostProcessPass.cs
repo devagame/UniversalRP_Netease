@@ -18,7 +18,7 @@ namespace UnityEngine.Rendering.Universal.Internal
     /// <summary>
     /// Renders the post-processing effect stack.
     /// </summary>
-    public class PostProcessPass : ScriptableRenderPass
+    public partial class PostProcessPass : ScriptableRenderPass  // Add By: XGAME
     {
         RenderTextureDescriptor m_Descriptor;
         RenderTargetIdentifier m_Source;
@@ -142,7 +142,11 @@ namespace UnityEngine.Rendering.Universal.Internal
             base.useNativeRenderPass = false;
         }
 
-        public void Cleanup() => m_Materials.Cleanup();
+        public void Cleanup()
+        {
+            m_Materials.Cleanup();
+            CleanupFSRBuffers();  // Add By: XGAME
+        }
 
         public void Setup(in RenderTextureDescriptor baseDescriptor, in RenderTargetHandle source, bool resolveToScreen, in RenderTargetHandle depth, in RenderTargetHandle internalLut, bool hasFinalPass, bool enableSRGBConversion, bool hasExternalPostPasses)
         {
@@ -192,6 +196,8 @@ namespace UnityEngine.Rendering.Universal.Internal
         public override void OnCameraSetup(CommandBuffer cmd, ref RenderingData renderingData)
         {
             overrideCameraTarget = true;
+
+            SetupFSRBuffers(renderingData.cameraData.exData.enableFSR);  // Add By: XGAME
 
             if (m_Destination == RenderTargetHandle.CameraTarget)
                 return;
@@ -1564,6 +1570,9 @@ namespace UnityEngine.Rendering.Universal.Internal
             else
 #endif
             {
+                if (TryRenderFSR(cmd, ref cameraData, material, colorLoadAction, cameraTargetHandle))  // Add By: XGAME
+                    return;
+
                 // Note: We need to get the cameraData.targetTexture as this will get the targetTexture of the camera stack.
                 // Overlay cameras need to output to the target described in the base camera while doing camera stack.
                 RenderTargetIdentifier cameraTarget = (cameraData.targetTexture != null) ? new RenderTargetIdentifier(cameraData.targetTexture) : cameraTargetHandle.Identifier();
