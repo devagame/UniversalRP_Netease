@@ -14,17 +14,15 @@ namespace UnityEditor.Rendering.Universal
         private SerializedProperty colorSpaceUsage;
         private SerializedProperty renderPostProcessing;
 
-
         private void DrawRenderSettingsEx()
         {
             EditorGUILayout.PropertyField(colorSpaceUsage);
         }
 
-
         private void InitEx(SerializedObject m_AdditionalCameraDataSO)
         {
             m_AdditionalCameraDataRenderAMDFSR = m_AdditionalCameraDataSO.FindProperty("m_AMDFSR");
-            colorSpaceUsage = m_AdditionalCameraDataSO.FindProperty("colorSpaceUsage");
+            colorSpaceUsage = m_AdditionalCameraDataSO.FindProperty("m_ColorSpaceUsage");
             renderPostProcessing = m_AdditionalCameraDataSO.FindProperty("m_RenderPostProcessing");
         }
 
